@@ -1,0 +1,190 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+//Declaração de variáveis
+int i=-1, j=-1, a=-1, b=-1;
+char matriz[4][4];
+
+struct nome_jogador
+{
+  char nome[3];
+};
+
+int result = 0;
+int defe = 0;
+int score = 0;
+
+//Função para calcular a pontuação
+int calculaPontuacao (int result, int defe) 
+{
+  int NAOMEXEKRUZE = result - defe;
+  return NAOMEXEKRUZE;
+}
+
+//Principal
+int main(void) {
+
+  FILE *pont_arq;
+
+  //Criando a variável que será do tipo struct
+  struct nome_jogador jogador;
+
+  //Realizando abertura do arquivo para armazenar o nome
+  pont_arq = fopen("arquivo_nome.txt", "w+");
+
+  //Gravando strings no arquivo
+  printf ("Informe o nome do jogador (3 caracteres): ");
+  scanf ("%s", jogador.nome);
+  fputs(jogador.nome, pont_arq);
+
+  //Usando fclose para fechar o arquivo
+  fclose(pont_arq);
+
+  //MENU
+  int option = 0;
+
+  //Função para que o jogo não pare até que o usuário selecione a devida opção
+  do {
+    
+    //Layout do menu
+    printf("\nCréditos: Victor Kruze Fiori\n");
+    printf("\nEscolha uma opção:\n");
+    printf("\nOpção fora dos parâmetros encerrará o programa!!\n");
+    printf("\n1 - Jogar");
+    printf("\n2 - Sair");
+    printf("\nOpção: ");
+    scanf("%d", &option);
+    
+    //Start
+    if(option == 1) {
+      printf("\nJogo da memória, adivinhe os iguais para vencer!\n");
+
+      //Jogo
+      while(result != 8) {
+        matriz[0][0]= 'X';
+        matriz[0][1]= 'Y';
+        matriz[0][2]= 'Z';
+        matriz[0][3]= 'A';
+        matriz[1][0]= 'A';
+        matriz[1][1]= 'G';
+        matriz[1][2]= 'P';
+        matriz[1][3]= 'O';
+        matriz[2][0]= 'X';
+        matriz[2][1]= 'Z';
+        matriz[2][2]= 'G';
+        matriz[2][3]= 'E';
+        matriz[3][0]= 'Y';
+        matriz[3][1]= 'P';
+        matriz[3][2]= 'O';
+        matriz[3][3]= 'E';
+
+        printf("\n%c" , matriz[i][j]);
+        printf("%c\n" , matriz[a][b]);
+        printf("\n[00] ; [01] ; [02] ; [03]\n[10] ; [11] ; [12] ; [13]\n[20] ; [21] ; [22] ; [23]\n[30] ; [31] ; [32] ; [33]");
+        printf("\n\nDigite UMA coordenada 0 0 à 3 3 separando os numeros por Enter:\n");
+        scanf("%d %d"  , &i , &j);
+        printf("[%d][%d]" , i , j);
+        printf("\n\nDigite UMA segunda coordenada 0 0 à 3 3 separando os numeros por Enter\n");
+        scanf("%d %d"  , &a , &b);
+        printf("[%d][%d]" , a , b);
+        system("clear");
+        printf("%c e", matriz[i][j]);
+        printf("%c\n", matriz[a][b]);
+        system("clear");
+
+        //Acertos
+        if(matriz[i][j]==matriz[a][b]){
+          result++;
+          printf("Você acertou! \n%d Acertos" , result);
+          score = calculaPontuacao (result, defe);
+          printf("\nPontuação: %d\n", score);
+        }
+
+        //Erros
+        if(matriz[i][j]!=matriz[a][b]){
+          defe++;
+          printf("Você errou! \n%d Erros" , defe);
+          score = calculaPontuacao (result, defe);
+          printf("\nPontuação: %d\n", score);
+        }
+      
+     
+        //Condição de vitória
+        if(result == 8) {
+
+          i = -1;
+          j = -1;
+          a = -1;
+          b = -1;
+
+          //Abrindo o arquivo_nome em modo "somente leitura"
+          pont_arq = fopen("arquivo_nome.txt", "r");
+
+          //Enquanto não for fim de arquivo o looping será executado e será impresso o nome do jogador
+          printf("Você venceu ");
+          while(fgets(jogador.nome, 3, pont_arq) != NULL)
+          printf("%s", jogador.nome);
+
+          //Fechando o arquivo
+          fclose(pont_arq);
+
+          printf("!! Só espero que não tenha acertado todas as mesmas casas iguais!\n");
+          printf("Pontuação: %d", score);
+          printf("\n\nDeseja jogar novamente? 1 - Sim | 2 - Sair \n");
+          scanf("%d", &option);
+          result=0;
+          defe=0;
+          if(option==2){
+            return 0;
+          }
+        }
+
+        //Condição de derrota
+        if(defe == 4) {
+
+          i = -1;
+          j = -1;
+          a = -1;
+          b = -1;
+
+          //Abrindo o arquivo_nome em modo "somente leitura"
+          pont_arq = fopen("arquivo_nome.txt", "r");
+
+          //Enquanto não for fim de arquivo o looping será executado e será impresso o nome do jogador
+          printf("Você perdeeeeeu ");
+          while(fgets(jogador.nome, 3, pont_arq) != NULL)
+          printf("%s", jogador.nome);
+          printf("!! \nHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA");
+
+          //Fechando o arquivo
+          fclose(pont_arq);
+
+          printf("\nPontuação: %d", score);
+          printf("\n\nDeseja jogar novamente? 1 - Sim | 2 - Sair \n");
+          scanf("%d", &option);
+          result=0;
+          defe=0;
+          if(option==2){
+            return 0;
+          }
+        }
+      }
+    }  
+  } while (option == 1);
+
+
+  //Sair do jogo
+  if (option == 2) {
+  return 0;
+  }
+
+  if(option > 2) {
+  printf("Opção Inválida!!\n\n");
+  }
+
+  option=0;
+  return 0;
+
+}
