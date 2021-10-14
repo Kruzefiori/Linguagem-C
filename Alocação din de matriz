@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main (){
+    setlocale(LC_ALL ,"");
+
+int linhas, colunas, i , j;
+
+int **matriz;
+
+printf("digite o número de linhas:\n");
+scanf("%d", &linhas);
+printf("\ndigite o número de Colunas:\n");
+scanf("%d", &colunas);
+
+matriz = (int**) malloc(linhas * sizeof(int*));
+
+for(i=0; i<linhas ; i++){
+    matriz[i]= (int*) malloc (colunas * sizeof (int));
+}
+
+
+for (i=0; i< linhas ; i++){
+    for(j=0; j<colunas; j++){
+        matriz[i][j]= i+1;
+         printf("\t%d ", matriz[i][j]);
+    }
+
+
+    printf("\n");
+}
+
+
+
+
+
+
+   return 0;
+    }
