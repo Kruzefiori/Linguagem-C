@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <stdbool.h>
+#include <time.h>
+
+void main (){
+    setlocale(LC_ALL ,"");
+    //alimenta o rng
+    srand((unsigned)time(NULL));
+
+    //
+    int r= rand()%101;
+
+    printf("%d" , r);
+
+
+
+    }
