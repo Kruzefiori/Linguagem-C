@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+
+int pilha_push(int* pilha, int tam, int valor, int *topo){
+    if(*topo==tam-1){
+    printf("pilha cheia");
+    }
+        else{
+        *topo=*topo +1;
+        pilha[*topo]= valor;
+        }
+}
+
+
+int main(){
+    setlocale(LC_ALL ,"");
+int tam;
+printf("insira o tamanho da pilha:\n");
+scanf("%d", &tam);
+
+int *pilha = (int*) malloc(tam * sizeof(int));
+int topo= -1;
+
+for (int j=0 ; j<tam ; j++){
+    pilha[j]=0;
+}
+
+
+for(int aux=0; aux<tam; aux++){
+    printf("\n insira um valor na posição %d ", aux);
+    scanf("%d", &pilha[aux]);
+
+    for(int cont=0; cont < tam; cont++){
+        printf(" %d - ",pilha[cont]);
+    }
+
+    pilha_push(pilha ,tam, pilha[aux] , &topo);
+}
+
+printf("\n");
+
+for(int cont=0; cont < tam; cont++){
+        printf("-%d - ",pilha[cont]);
+    }
+
+return 0;
+}
