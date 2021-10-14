@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+
+void imprime_vetor(int tam, int vetor[tam]){
+int i;
+printf("\n");
+for (i=0; i<tam; i++){
+    printf(" | %d |", vetor[i]);
+}
+
+}
+
+
+
+void quick_sort(int tam ,int *vetor, int inicio, int fim){
+
+    int pivo, esq, dir, meio, aux;
+
+    //Limites da esquerda e direita da região analisada
+    esq = inicio;
+    dir = fim-1;
+
+    //Ajustando auxiliares do centro
+    meio = (int) ((dir+esq) / 2);
+    pivo = vetor[meio];
+    imprime_vetor(tam, vetor);
+
+    while(dir >= esq){
+
+        while(vetor[esq] < pivo){
+            esq = esq + 1;
+        }
+    //imprime_vetor(tam, vetor);
+        while(vetor[dir] > pivo){
+            dir = dir - 1;
+        }
+
+        if(esq <= dir){
+
+            //Realiza uma troca
+            aux = vetor[esq];
+            vetor[esq] = vetor[dir];
+            vetor[dir] = aux;
+
+            //Faz os limites laterais caminharem para o centro
+            esq = esq + 1;
+            dir = dir - 1;
+        }
+
+      //  imprime_vetor(tam, vetor);
+
+    }
+
+    //Recursão para continuar ordenando
+    if(inicio < dir){
+        quick_sort(tam, vetor, inicio, dir);
+    }
+
+     //Recursão para continuar ordenando
+    if(esq < fim){
+         quick_sort(tam, vetor, esq, fim);
+    }
+
+}
+
+int main(){
+    setlocale(LC_ALL ,"");
+
+    int tam, aux;
+    printf("Digite o tamanho do vetor a ser ordenado:");
+    scanf("%d", &tam);
+    int *vetor = (int*) malloc(tam * sizeof(int));
+    printf("Digite os valores do vetor a ser ordenado:");
+    for(int x=0; x<tam; x++){
+        scanf("%d", &aux);
+        vetor[x]=aux;
+    }
+
+
+    quick_sort(tam ,vetor, 0, tam);
+
+    imprime_vetor(tam ,vetor);
+
+
+    return 0;
+    }
