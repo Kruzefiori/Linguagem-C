@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main(void) {
+  int x=1 , y=20;
+printf("\n\n1 a 20\n\n");
+
+  while (x<21){
+    printf("%d\n" , x);
+    x++;
+  }
+  
+  printf("\n\n20 a 1\n\n");
+
+  while (y>0){
+printf("%d\n" , y);
+y--;
+  }
+
+  printf("\n\n1 a 20 apenas ímpares \n");
+
+x=0;
+  while(x <=20)
+  {
+    if (x%2 == 1){
+
+    printf("\n\n%d" , x);}
+    x++;
+    
+  }
+
+return 0;
+  }
+  
