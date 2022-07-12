@@ -6,7 +6,9 @@
 //Procure mexer o minimo possivel na main.
 //basicamente voce precisa implementar as funcoes
 //"adiciona_ponto" e "busca_ponto"
-
+typedef struct oceano{
+  
+}
 
 
 int main(int argc, char * argv[]){
